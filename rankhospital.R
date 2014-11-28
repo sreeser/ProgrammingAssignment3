@@ -30,6 +30,11 @@ rankhospital <- function(state, outcome, num = "best") {
   #sort by rate then name
   data <-data[order(data[,outcome],data[,"hospital"]),]
   
+  data<-cbind(data,rank=1:nrow(data))
+  
+  if(num=="best") num=min(data["rank"])
+  if(num=="worst") num=max(data["rank"])
+  
   #return the name of the hospital with lowest rate
   data[num,"hospital"]
 
